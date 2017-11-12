@@ -32,7 +32,14 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            @*Add modules here*@
+            @foreach (var module in Model.Modules)
+            {
+                <div class="panel module">
+                    <div class="panel-body">
+                        <h5>@module.ModuleTitle</h5>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-sm-3">
             @*Add instructor bio here*@
