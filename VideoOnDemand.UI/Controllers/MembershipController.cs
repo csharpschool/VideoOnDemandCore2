@@ -76,7 +76,41 @@ namespace VideoOnDemand.UI.Controllers
         [HttpGet]
         public IActionResult Video(int id)
         {
-            return View();
+            var video = _db.GetVideo(_userId, id);
+            var course = _db.GetCourse(_userId, video.CourseId);
+            var mappedVideoDTO = _mapper.Map<VideoDTO>(video);
+            var mappedCourseDTO = _mapper.Map<CourseDTO>(course);
+            var mappedInstructorDTO =
+                _mapper.Map<InstructorDTO>(course.Instructor);
+
+            // Create a LessonInfoDto object
+            var videos = _db.GetVideos(_userId, video.ModuleId).ToList();
+            var count = videos.Count();
+            var index = videos.IndexOf(video);
+            var previous = videos.ElementAtOrDefault(index - 1);
+            var previousId = previous == null ? 0 : previous.Id;
+            var next = videos.ElementAtOrDefault(index + 1);
+            var nextId = next == null ? 0 : next.Id;
+            var nextTitle = next == null ? string.Empty : next.Title;
+            var nextThumb = next == null ? string.Empty : next.Thumbnail;
+
+            var videoModel = new VideoViewModel
+            {
+                Video = mappedVideoDTO,
+                Instructor = mappedInstructorDTO,
+                Course = mappedCourseDTO,
+                LessonInfo = new LessonInfoDTO
+                {
+                    LessonNumber = index + 1,
+                    NumberOfLessons = count,
+                    NextVideoId = nextId,
+                    PreviousVideoId = previousId,
+                    NextVideoTitle = nextTitle,
+                    NextVideoThumbnail = nextThumb
+                }
+            };
+
+            return View(videoModel);
         }
     }
 }
