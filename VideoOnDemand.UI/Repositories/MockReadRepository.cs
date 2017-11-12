@@ -101,5 +101,24 @@ namespace VideoOnDemand.UI.Repositories
 
             return courses;
         }
+        public Course GetCourse(string userId, int courseId)
+        {
+            var course = _userCourses.Where(uc => uc.UserId.Equals(userId))
+                .Join(_courses, uc => uc.CourseId, c => c.Id, (uc, c) => new { Course = c })
+                .SingleOrDefault(s => s.Course.Id.Equals(courseId)).Course;
+
+            course.Instructor = _instructors.SingleOrDefault(s => s.Id.Equals(course.InstructorId));
+
+            course.Modules = _modules.Where(m => m.CourseId.Equals(course.Id)).ToList();
+
+            foreach (var module in course.Modules)
+            {
+                module.Downloads = _downloads.Where(d => d.ModuleId.Equals(module.Id)).ToList();
+                module.Videos = _videos.Where(v => v.ModuleId.Equals(module.Id)).ToList();
+            }
+
+            return course;
+        }
+
     }
 }
