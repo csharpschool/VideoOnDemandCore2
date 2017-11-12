@@ -1,1 +1,27 @@
-﻿
+﻿.navigation-bar {
+    margin-bottom: 10px;
+}
+
+.course-content .marquee {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background-size: cover;
+    /* Relative positioning of the marquee is needed for the cover
+       image’s absolute position */
+    position: relative;
+}
+
+    .course-content .marquee .cover-image {
+        width: auto;
+        height: 140px;
+        position: absolute;
+        bottom: 0;
+        margin: 30px;
+        border: 4px solid #FFF;
+        border-radius: 2px;
+    }
+
+.membership h1, .membership h4 {
+    color: #666c74;
+}
