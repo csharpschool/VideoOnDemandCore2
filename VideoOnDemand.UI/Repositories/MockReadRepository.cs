@@ -28,11 +28,11 @@ namespace VideoOnDemand.UI.Repositories
         };
         List<UserCourse> _userCourses = new List<UserCourse>
         {
-            new UserCourse { UserId = "4ad684f8-bb70-4968-85f8-458aa7dc19a3",
+            new UserCourse { UserId = "3fcd8c17-0a83-4c70-8b1c-9b2d4131a92f",
                 CourseId = 1 },
             new UserCourse { UserId = "00000000-0000-0000-0000-000000000000",
                 CourseId = 2 },
-            new UserCourse { UserId = "4ad684f8-bb70-4968-85f8-458aa7dc19a3",
+            new UserCourse { UserId = "3fcd8c17-0a83-4c70-8b1c-9b2d4131a92f",
                 CourseId = 3 },
             new UserCourse { UserId = "00000000-0000-0000-0000-000000000000",
                 CourseId = 1 }
