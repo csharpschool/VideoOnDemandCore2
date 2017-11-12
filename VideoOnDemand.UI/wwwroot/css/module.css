@@ -1,0 +1,33 @@
+﻿.panel.module .panel-body {
+    padding: 10px 20px;
+}
+
+.module .panel-body h5 {
+    font-weight: 600;
+}
+
+.module-video {
+    border-top: 1px solid #dadada;
+}
+
+    .module-video .thumb-container {
+        overflow: hidden;
+        width: 100px;
+    }
+
+    .module-video .thumb {
+        width: 100%;
+    }
+
+    .module-video h5 {
+        margin-top: 0;
+    }
+
+    .module-video a {
+        color: #666c74;
+        text-decoration: none;
+    }
+
+    .module-video p {
+        margin-bottom: 0;
+    }
