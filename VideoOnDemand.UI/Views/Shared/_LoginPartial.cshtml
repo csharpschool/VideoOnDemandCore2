@@ -10,12 +10,12 @@
           method="post" id="logoutForm">
         <ul class="nav navbar-nav navbar-right">
             <li>@User.Identity.Name</li>
-            <li class="drop-down pull-right">
-                <a href="#" id="user-drop-down" class="drop-down-toggle user-drop-down" data-toggle="drop-down" role="button" aria-expanded="false">
+            <li class="dropdown pull-right">
+                <a href="#" id="user-dropdown" class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-expanded="false">
                     <img src="~/images/avatar.png" class="img-circle avatar" alt="" height="40">
                     <span class="caret text-light hidden-xs"></span>
                 </a>
-                <ul class="drop-down-menu" role="menu">
+                <ul class="dropdown-menu" role="menu">
                     <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
