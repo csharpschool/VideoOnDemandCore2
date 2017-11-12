@@ -44,7 +44,14 @@
                         @await Html.PartialAsync("_ModuleVideosPartial", module.Videos)
                     }
 
-
+                    @if (module.Downloads != null)
+                    {
+                        <hr class="no-margin">
+                        <div class="panel-body download-panel">
+                            <h5>Downloads</h5>
+                            @await Html.PartialAsync("_ModuleDownloadsPartial", module.Downloads)
+                        </div>
+                    }
                 </div>
             }
         </div>
