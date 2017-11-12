@@ -129,6 +129,15 @@ namespace VideoOnDemand.UI.Repositories
 
             return video;
         }
+        public IEnumerable<Video> GetVideos(string userId, int moduleId = 0)
+        {
+            var videos = _videos
+                .Join(_userCourses, v => v.CourseId, uc => uc.CourseId, (v, uc) => new { Video = v, UserCourse = uc })
+                .Where(vuc => vuc.UserCourse.UserId.Equals(userId));
 
+            return moduleId.Equals(0) ?
+                videos.Select(s => s.Video) : 
+                videos.Where(v => v.Video.ModuleId.Equals(moduleId)).Select(s => s.Video);
+        }
     }
 }
