@@ -31,3 +31,18 @@
     .module-video p {
         margin-bottom: 0;
     }
+
+/*Downloads section*/
+.membership hr.no-margin {
+    margin: 0;
+}
+
+.download-panel ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.download-panel li {
+    margin-top: 5px;
+    font-size: 0.87em;
+}
