@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.course-listing.panel .thumb {
+    width: 100%;
+    height: auto;
+}
+
+.course-listing.panel .panel-body {
+    padding: 10px 30px 30px 30px;
+}
+
+.course-listing.panel {
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}

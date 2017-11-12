@@ -1,0 +1,56 @@
+﻿body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #f2f2f2;
+}
+
+.membership.top-margin {
+    margin-top: 25px;
+}
+
+.membership h2 {
+    font-size: 1.5em;
+}
+
+.membership .text-dark {
+    color: #454c56 !important;
+}
+
+.membership hr {
+    border-top: 1px solid #dadada;
+}
+
+    .membership hr.thick {
+        border-top-width: 2px;
+    }
+
+    .membership hr.margin {
+        margin: 15px 0 25px;
+    }
+
+.membership h3 {
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.membership p, .membership a {
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+    .membership a.btn {
+        font-weight: 800;
+        padding: 9px 15px;
+        border-radius: 2px;
+    }
+
+        .membership a.btn.btn-primary {
+            background-color: #2d91fb;
+            outline: none;
+            border: none;
+        }
+
+            .membership a.btn.btn-primary:hover {
+                background-color: #0577f0;
+                border-color: #0577f0;
+            }
