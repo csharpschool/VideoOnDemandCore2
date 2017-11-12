@@ -1,0 +1,27 @@
+﻿@model IEnumerable<VideoDTO>
+
+@foreach (var video in Model)
+{
+    <div class="panel-body module-video">
+        <a href="~/Membership/Video/@video.Id">
+            <div class="media">
+                <div class="media-left hidden-xs">
+                    <div class="thumb-container">
+                        <img src="@video.Thumbnail" class="thumb">
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h5>@video.Title</h5>
+                    <p class="text-light">
+                        <i class="glyphicon glyphicon-time"></i>
+                        @video.Duration minutes
+                    </p>
+                    <p>@video.Description</p>
+                </div>
+                <div class="media-right hidden-xs text-light">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+}

@@ -38,6 +38,13 @@
                     <div class="panel-body">
                         <h5>@module.ModuleTitle</h5>
                     </div>
+
+                    @if (module.Videos != null)
+                    {
+                        @await Html.PartialAsync("_ModuleVideosPartial", module.Videos)
+                    }
+
+
                 </div>
             }
         </div>
