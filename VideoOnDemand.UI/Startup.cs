@@ -12,6 +12,7 @@ using VideoOnDemand.UI.Models;
 using VideoOnDemand.UI.Services;
 using VideoOnDemand.Data.Data.Entities;
 using VideoOnDemand.Data.Data;
+using VideoOnDemand.UI.Repositories;
 
 namespace VideoOnDemand.UI
 {
@@ -36,6 +37,7 @@ namespace VideoOnDemand.UI
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton<IReadRepository, MockReadRepository>();
 
             services.AddMvc();
         }
