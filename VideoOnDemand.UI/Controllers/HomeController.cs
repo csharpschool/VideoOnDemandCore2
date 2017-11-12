@@ -21,7 +21,7 @@ namespace VideoOnDemand.UI.Controllers
             if (!_signInManager.IsSignedIn(User))
                 return RedirectToAction("Login", "Account");
 
-            return View();
+            return RedirectToAction("Dashboard", "Membership");
         }
 
         public IActionResult About()
