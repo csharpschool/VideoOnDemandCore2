@@ -56,10 +56,12 @@
             }
         </div>
         <div class="col-sm-3">
-            @*Add instructor bio here*@
+            @if (Model.Instructor != null)
+            {
+                @await Html.PartialAsync("_InstructorBioPartial", Model.Instructor)
+            }
         </div>
     </div>
-
 </div>
 
 
