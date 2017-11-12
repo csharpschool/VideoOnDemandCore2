@@ -86,5 +86,20 @@ namespace VideoOnDemand.UI.Repositories
             }
         };
         #endregion
+
+        public IEnumerable<Course> GetCourses(string userId)
+        {
+            var courses = _userCourses.Where(uc => uc.UserId.Equals(userId))
+                .Join(_courses, uc => uc.CourseId, c => c.Id, (uc, c) => new { Course = c })
+                .Select(s => s.Course);
+
+            foreach (var course in courses)
+            {
+                course.Instructor = _instructors.SingleOrDefault(s => s.Id.Equals(course.InstructorId));
+                course.Modules = _modules.Where(m => m.CourseId.Equals(course.Id)).ToList();
+            }
+
+            return courses;
+        }
     }
 }
