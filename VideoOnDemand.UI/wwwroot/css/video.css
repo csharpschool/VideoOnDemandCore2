@@ -6,3 +6,12 @@
     border: none;
     border-radius: 0px;
 }
+
+/*Coming Up Section*/
+.coming-up .btn-group {
+    width: 100%;
+}
+
+    .coming-up .btn-group .btn {
+        width: 50%;
+    }
