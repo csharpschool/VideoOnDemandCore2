@@ -41,5 +41,24 @@ namespace VideoOnDemand.Data.Services
             return (collections: collections, references: classes);
         }
 
+        public TEntity Get<TEntity>(int id, bool includeRelatedEntities = false) where TEntity : class
+        {
+            var record = _db.Set<TEntity>().Find(new object[] { id });
+
+            if (record != null && includeRelatedEntities)
+            {
+                var entities = GetEntityNames<TEntity>();
+
+                // Eager load all the tables referenced by the generic type T
+                foreach (var entity in entities.collections)
+                    _db.Entry(record).Collection(entity).Load();
+
+                foreach (var entity in entities.references)
+                    _db.Entry(record).Reference(entity).Load();
+            }
+
+            return record;
+        }
+
     }
 }

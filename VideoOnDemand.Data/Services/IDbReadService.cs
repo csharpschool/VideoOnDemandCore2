@@ -8,5 +8,6 @@ namespace VideoOnDemand.Data.Services
     public interface IDbReadService
     {
         IQueryable<TEntity> Get<TEntity>() where TEntity : class;
+        TEntity Get<TEntity>(int id, bool includeRelatedEntities = false) where TEntity : class;
     }
 }
