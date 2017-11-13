@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -80,5 +81,10 @@ namespace VideoOnDemand.Data.Services
             return dbset;
         }
 
+        public SelectList GetSelectList<TEntity>(string valueField, string textField) where TEntity : class
+        {
+            var items = Get<TEntity>();
+            return new SelectList(items, valueField, textField);
+        }
     }
 }
