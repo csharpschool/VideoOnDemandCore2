@@ -10,5 +10,6 @@ namespace VideoOnDemand.Data.Services
         IQueryable<TEntity> Get<TEntity>() where TEntity : class;
         TEntity Get<TEntity>(int id, bool includeRelatedEntities = false) where TEntity : class;
         TEntity Get<TEntity>(string userId, int id) where TEntity : class;
+        IEnumerable<TEntity> GetWithIncludes<TEntity>() where TEntity : class;
     }
 }

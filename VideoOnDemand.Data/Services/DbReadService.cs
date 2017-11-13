@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using VideoOnDemand.Data.Data;
@@ -64,6 +65,19 @@ namespace VideoOnDemand.Data.Services
         {
             var record = _db.Set<TEntity>().Find(new object[] { userId, id });
             return record;
+        }
+
+        public IEnumerable<TEntity> GetWithIncludes<TEntity>() where TEntity : class
+        {
+            var entityNames = GetEntityNames<TEntity>();
+            var dbset = _db.Set<TEntity>();
+
+            var entities = entityNames.collections.Union(entityNames.references);
+
+            foreach (var entity in entities)
+                _db.Set<TEntity>().Include(entity).Load();
+
+            return dbset;
         }
 
     }
