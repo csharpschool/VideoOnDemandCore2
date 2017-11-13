@@ -1,7 +1,40 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
 @model IndexModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 
-@await Html.PartialAsync("_CardPartial", Model.Cards.instructors)
+<br />
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-xs-offset-2 col-sm-8 col-sm-offset-3 col-md-6
+        col-md-offset-4">
+            @await Html.PartialAsync("_CardPartial", Model.Cards.instructors)
+            @await Html.PartialAsync("_CardPartial", Model.Cards.users)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-2 col-sm-8 col-sm-offset-3 col-md-6
+        col-md-offset-4">
+            @await Html.PartialAsync("_CardPartial", Model.Cards.courses)
+            @await Html.PartialAsync("_CardPartial", Model.Cards.modules)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-2 col-sm-8 col-sm-offset-3 col-md-6
+        col-md-offset-4">
+            @await Html.PartialAsync("_CardPartial", Model.Cards.videos)
+            @await Html.PartialAsync("_CardPartial", Model.Cards.downloads)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-2 col-sm-8 col-sm-offset-3 col-md-6
+        col-md-offset-4">
+            @await Html.PartialAsync("_CardPartial", Model.Cards.userCourses)
+        </div>
+    </div>
+}
