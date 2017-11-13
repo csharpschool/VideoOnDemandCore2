@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using VideoOnDemand.Data.Data;
 using VideoOnDemand.Data.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using VideoOnDemand.Data.Migrations;
 
 namespace VideoOnDemand.Data
 {
@@ -32,12 +33,14 @@ namespace VideoOnDemand.Data
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, VODContext db)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            DbInitializer.Initialize(db);
 
             app.Run(async (context) =>
             {
