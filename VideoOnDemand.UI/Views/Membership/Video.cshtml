@@ -24,7 +24,12 @@
         </div>
 
         <div class="col-sm-3">
-            @*Place the Coming Up and Instructor Bio sections here*@
+            @if (Model != null && Model.LessonInfo != null)
+            {
+                @await Html.PartialAsync("_VideoComingUpPartial", Model.LessonInfo)
+            }
+
+
         </div>
     </div>
 </div>
