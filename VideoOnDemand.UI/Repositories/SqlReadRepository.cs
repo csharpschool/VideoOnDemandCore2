@@ -46,7 +46,12 @@ namespace VideoOnDemand.UI.Repositories
 
         public Video GetVideo(string userId, int videoId)
         {
-            throw new NotImplementedException();
+            var video = _db.Get<Video>(videoId);
+
+            var hasAccess = _db.Get<UserCourse>(userId, video.CourseId) != null;
+            if (!hasAccess) return default(Video);
+
+            return video;
         }
 
         public IEnumerable<Video> GetVideos(string userId, int moduleId = 0)
