@@ -83,6 +83,10 @@ namespace VideoOnDemand.UI.Repositories
             new Video { Id = 4, ModuleId = 2, CourseId = 1, Position = 1,
                 Title = "Video 4 Title", Description = "Video 4 Description: A very very long description.",
                 Duration = 42, Thumbnail = "/images/video4.jpg", Url = "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+            },
+            new Video { Id = 5, ModuleId = 1, CourseId = 1, Position = 3,
+                Title = "Video 4 Title", Description = "Video 5 Description: A very very long description.",
+                Duration = 91, Thumbnail = "/images/video5.jpg", Url = "https://www.youtube.com/watch?v=BJFyzpBcaCY"
             }
         };
         #endregion

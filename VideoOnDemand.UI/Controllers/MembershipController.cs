@@ -105,6 +105,8 @@ namespace VideoOnDemand.UI.Controllers
                     NumberOfLessons = count,
                     NextVideoId = nextId,
                     PreviousVideoId = previousId,
+                    CurrentVideoTitle = video.Title,
+                    CurrentVideoThumbnail = video.Thumbnail,
                     NextVideoTitle = nextTitle,
                     NextVideoThumbnail = nextThumb
                 }
