@@ -13,5 +13,6 @@ namespace VideoOnDemand.Data.Services
         TEntity Get<TEntity>(string userId, int id) where TEntity : class;
         IEnumerable<TEntity> GetWithIncludes<TEntity>() where TEntity : class;
         SelectList GetSelectList<TEntity>(string valueField, string textField) where TEntity : class;
+        (int courses, int downloads, int instructors, int modules, int videos, int users, int userCourses) Count();
     }
 }

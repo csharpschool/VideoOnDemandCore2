@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VideoOnDemand.Data.Data;
 using VideoOnDemand.Data.Data.Entities;
+using VideoOnDemand.Data.Services;
 
 namespace VideoOnDemand.Admin
 {
@@ -32,6 +33,8 @@ namespace VideoOnDemand.Admin
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<VODContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddTransient<IDbReadService, DbReadService>();
 
             services.AddMvc();
         }
