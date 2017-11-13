@@ -60,5 +60,11 @@ namespace VideoOnDemand.Data.Services
             return record;
         }
 
+        public TEntity Get<TEntity>(string userId, int id) where TEntity : class
+        {
+            var record = _db.Set<TEntity>().Find(new object[] { userId, id });
+            return record;
+        }
+
     }
 }
