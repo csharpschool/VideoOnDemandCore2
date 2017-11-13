@@ -29,7 +29,11 @@
                 @await Html.PartialAsync("_VideoComingUpPartial", Model.LessonInfo)
             }
 
-
+            @if (Model != null && Model.Instructor != null)
+            {
+                @await Html.PartialAsync("_InstructorBioPartial",
+                    Model.Instructor)
+            }
         </div>
     </div>
 </div>
