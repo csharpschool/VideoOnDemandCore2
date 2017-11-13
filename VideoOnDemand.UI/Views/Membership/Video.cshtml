@@ -16,7 +16,11 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            @*Place the video player here*@
+            @if (Model != null && Model.Video != null &&
+                 Model.LessonInfo != null && Model.Course != null)
+            {
+                @await Html.PartialAsync("_VideoPlayerPartial", Model)
+            }
         </div>
 
         <div class="col-sm-3">

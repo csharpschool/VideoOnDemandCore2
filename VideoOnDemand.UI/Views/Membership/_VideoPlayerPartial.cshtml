@@ -1,0 +1,35 @@
+﻿@model VideoViewModel
+
+<div class="panel">
+    @if (Model.Video.Url != null)
+    {
+        <div id="video" class="video-margin">&nbsp;</div>
+        <div id="hiddenUrl" hidden="hidden">@Model.Video.Url</div>
+        <div id="hiddenImageUrl" hidden="hidden">
+            @Model.Video.Thumbnail
+        </div>
+    }
+
+    <div class="panel-body">
+        <h2 class="text-dark">@Model.Video.Title</h2>
+        <p class="text-light">
+            <i class="glyphicon glyphicon-facetime-video"></i>
+            Lesson @Model.LessonInfo.LessonNumber/
+            @Model.LessonInfo.NumberOfLessons&nbsp;&nbsp;
+            <i class="glyphicon glyphicon-time"></i>
+            @Model.Video.Duration minutes
+        </p>
+        <div class="media-object">
+            <div class="media-left">
+                <img src="@Model.Course.CourseImageUrl">
+            </div>
+            <div class="media-body media-middle">
+                <p>@Model.Course.CourseTitle</p>
+            </div>
+        </div>
+    </div>
+    <hr class="no-margin">
+    <div class="panel-body">
+        @Model.Video.Description
+    </div>
+</div>
