@@ -1,4 +1,5 @@
-﻿using VideoOnDemand.Data.Data;
+﻿using System.Linq;
+using VideoOnDemand.Data.Data;
 
 namespace VideoOnDemand.Data.Services
 {
@@ -8,6 +9,11 @@ namespace VideoOnDemand.Data.Services
         public DbReadService(VODContext db)
         {
             _db = db;
+        }
+
+        public IQueryable<TEntity> Get<TEntity>() where TEntity : class
+        {
+            return _db.Set<TEntity>();
         }
 
     }

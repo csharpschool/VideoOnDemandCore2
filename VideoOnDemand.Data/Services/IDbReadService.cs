@@ -7,5 +7,6 @@ namespace VideoOnDemand.Data.Services
 {
     public interface IDbReadService
     {
+        IQueryable<TEntity> Get<TEntity>() where TEntity : class;
     }
 }
