@@ -67,7 +67,7 @@ namespace VideoOnDemand.Data.Migrations
                             InstructorId = instructorId2,
                             Title = "Course 2",
                             Description = description,
-                            ImageUrl = "/images/course1.jpg",
+                            ImageUrl = "/images/course2.jpg",
                             MarqueeImageUrl = "/images/laptop.jpg"
                         },
                         new Course {
