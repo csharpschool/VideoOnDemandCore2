@@ -67,7 +67,22 @@ namespace VideoOnDemand.Admin.TagHelpers
                         Description = $" {Description}";
                 }
 
-                output.Content.AppendHtml($@"<a {href}><span {glyphClasses}></span>{Description}</a>");
+                // Bootstrap Buttons
+                BootstrapStyle = BootstrapStyle.Trim();
+                if (!BootstrapStyle.StartsWith("btn-"))
+                    BootstrapStyle = $"btn-{BootstrapStyle}";
+
+                BootstrapSize = BootstrapSize.Trim();
+                if (!BootstrapSize.StartsWith("btn-"))
+                    BootstrapSize = $"btn-{BootstrapSize}";
+
+                var BootstrapClass = string.Empty;
+
+                if (BootstrapStyle.Length > 4 && BootstrapSize.Length > 4)
+                    BootstrapClass = $"class='{BootstrapSize} {BootstrapStyle}'";
+
+                output.Content.AppendHtml($"<a style='min-width:30px;display:inline-block;' {BootstrapClass} {href}><span { glyphClasses}></span>{ Description}</a>");
+
             }
         }
     }
