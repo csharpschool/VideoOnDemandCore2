@@ -16,4 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VideoOnDemand.Data\VideoOnDemand.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Users\" />
+  </ItemGroup>
 </Project>
