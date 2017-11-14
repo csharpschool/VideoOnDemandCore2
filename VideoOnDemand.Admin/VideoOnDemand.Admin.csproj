@@ -14,9 +14,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\VideoOnDemand.Data\VideoOnDemand.Data.csproj" />
   </ItemGroup>
 </Project>
