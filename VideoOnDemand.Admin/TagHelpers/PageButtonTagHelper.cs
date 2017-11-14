@@ -39,6 +39,21 @@ namespace VideoOnDemand.Admin.TagHelpers
                 else
                     href = $@"href='/{Path.Trim()}'";
 
+                var ids = context.AllAttributes.Where(c => c.Name.StartsWith("id"));
+
+                // Generate Id parameters
+                var param = "";
+                foreach (var id in ids)
+                {
+                    var name = id.Name;
+                    if (name.Contains("-"))
+                        name = name.Substring(name.IndexOf('-') + 1);
+                    param += $"&{name}={id.Value}";
+                }
+                if (param.StartsWith("&")) param = param.Substring(1);
+                if (param.Length > 0)
+                    href = href.Insert(href.Length - 1, $"?{param}");
+
                 output.Content.AppendHtml($@"<a {href}>{Description}</a>");
             }
         }
