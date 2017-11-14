@@ -4,43 +4,46 @@
 @inject SignInManager<User> SignInManager
 @model IndexModel
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Videos";
 }
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h2>Users</h2>
+        <div class="col-md-12">
+            <h2>@ViewData["Title"]</h2>
             <status-message message="@Model.StatusMessage" message-type="success"></status-message>
-            <page-button path="Users/Create" Bootstrap-style="primary" description="Create New"></page-button>
+            <page-button path="Videos/Create" Bootstrap-style="primary" description="Create New"></page-button>
             <page-button path="Index" Bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Id</th>
+                        <td>Title</td>
+                        <td>Description</td>
+                        <th>Url</th>
+                        <th>Course</th>
+                        <th>Module</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in Model.Users)
+                    @foreach (var item in Model.Items)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => user.Email)</td>
-                            <td>@Html.DisplayFor(modelItem => user.IsAdmin)</td>
-                            <td>@Html.DisplayFor(modelItem => user.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Url)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Course.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Module.Title)</td>
                             <td class="button-col-width">
-                                <page-button path="Users/Edit" Bootstrap-style="success" glyph="pencil" id-userId="@user.Id"></page-button>
-                                <page-button path="Users/Delete" Bootstrap-style="danger" glyph="remove" id-userId="@user.Id"></page-button>
+                                <page-button path="Videos/Edit" Bootstrap-style="success" glyph="pencil" id="@item.Id"></page-button>
+                                <page-button path="Videos/Delete" Bootstrap-style="danger" glyph="remove" id="@item.Id"></page-button>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-2">
         </div>
     </div>
 }
