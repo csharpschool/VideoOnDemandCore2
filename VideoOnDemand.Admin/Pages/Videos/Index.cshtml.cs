@@ -4,27 +4,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using VideoOnDemand.Admin.Services;
 using VideoOnDemand.Admin.Models;
+using VideoOnDemand.Data.Data.Entities;
+using VideoOnDemand.Data.Services;
 
-namespace VideoOnDemand.Admin.Pages.Users
+namespace VideoOnDemand.Admin.Pages.Videos
 {
     [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
-        private IUserService _userService;
-        public IEnumerable<UserPageModel> Users = new List<UserPageModel>();
+        private IDbReadService _dbReadService;
+        public IEnumerable<Video> Items = new List<Video>();
+        [TempData] public string StatusMessage { get; set; }
 
-        [TempData]
-        public string StatusMessage { get; set; }
-
-
-        public IndexModel(IUserService userService)
+        public IndexModel(IDbReadService dbReadService)
         {
-            _userService = userService;
+            _dbReadService = dbReadService;
         }
 
         public void OnGet()
         {
-            Users = _userService.GetUsers();
+            Items = _dbReadService.GetWithIncludes<Video>();
         }
     }
+
 }
