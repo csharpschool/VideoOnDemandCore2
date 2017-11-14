@@ -17,6 +17,20 @@ namespace VideoOnDemand.Admin.Services
             _userManager = userManager;
         }
 
+        public UserPageModel GetUser(string userId)
+        {
+            return (from user in _db.Users
+                    where user.Id.Equals(userId)
+                    select new UserPageModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        IsAdmin = _db.UserRoles.Any(ur =>
+                            ur.UserId.Equals(user.Id) &&
+                            ur.RoleId.Equals(1.ToString()))
+                    }).FirstOrDefault();
+        }
+
         public IEnumerable<UserPageModel> GetUsers()
         {
             return from user in _db.Users
