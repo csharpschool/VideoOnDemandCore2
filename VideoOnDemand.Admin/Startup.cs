@@ -36,6 +36,7 @@ namespace VideoOnDemand.Admin
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IDbReadService, DbReadService>();
+            services.AddTransient<IDbWriteService, DbWriteService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddMvc();

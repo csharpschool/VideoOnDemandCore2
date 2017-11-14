@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using VideoOnDemand.Data.Data;
 
-namespace VideoOnDemand.Admin.Services
+namespace VideoOnDemand.Data.Services
 {
     public class DbWriteService : IDbWriteService
     {

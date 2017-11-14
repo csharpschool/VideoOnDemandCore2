@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace VideoOnDemand.Admin.Services
+namespace VideoOnDemand.Data.Services
 {
     public interface IDbWriteService
     {
