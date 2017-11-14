@@ -5,6 +5,7 @@ using VideoOnDemand.Admin.Models;
 using VideoOnDemand.Data.Data;
 using VideoOnDemand.Data.Data.Entities;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace VideoOnDemand.Admin.Services
 {
@@ -56,6 +57,32 @@ namespace VideoOnDemand.Admin.Services
                            ur.UserId.Equals(user.Id) &&
                            ur.RoleId.Equals(1.ToString()))
                    };
+        }
+
+        public async Task<bool> UpdateUserAsync(UserPageModel user)
+        {
+            var dbUser = await _db.Users.FirstOrDefaultAsync(u => u.Id.Equals(user.Id));
+            if (dbUser == null) return false;
+            if (string.IsNullOrEmpty(user.Email)) return false;
+
+            dbUser.Email = user.Email;
+
+            var userRole = new IdentityUserRole<string>()
+            {
+                RoleId = "1",
+                UserId = user.Id
+            };
+
+            var isAdmin = await _db.UserRoles.AnyAsync(ur =>
+                ur.Equals(userRole));
+
+            if (isAdmin && !user.IsAdmin)
+                _db.UserRoles.Remove(userRole);
+            else if (!isAdmin && user.IsAdmin)
+                await _db.UserRoles.AddAsync(userRole);
+
+            var result = await _db.SaveChangesAsync();
+            return result >= 0;
         }
     }
 }

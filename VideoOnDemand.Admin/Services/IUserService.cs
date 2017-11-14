@@ -10,5 +10,6 @@ namespace VideoOnDemand.Admin.Services
         IEnumerable<UserPageModel> GetUsers();
         UserPageModel GetUser(string userId);
         Task<IdentityResult> AddUserAsync(RegisterUserPageModel user);
+        Task<bool> UpdateUserAsync(UserPageModel user);
     }
 }
