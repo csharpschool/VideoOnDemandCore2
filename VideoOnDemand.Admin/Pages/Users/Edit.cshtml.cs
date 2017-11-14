@@ -1,49 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
-using VideoOnDemand.Data.Services;
-using VideoOnDemand.Data.Data.Entities;
+using VideoOnDemand.Admin.Models;
+using VideoOnDemand.Admin.Services;
 
-namespace VideoOnDemand.Admin.Pages.Videos
+namespace VideoOnDemand.Admin.Pages.Users
 {
     [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
-        private IDbWriteService _dbWriteService;
-        private IDbReadService _dbReadService;
+        private IUserService _userService;
 
-        [BindProperty] public Video Input { get; set; } = new Video();
-        [TempData] public string StatusMessage { get; set; }
-        public EditModel(IDbReadService dbReadService,
-        IDbWriteService dbWriteService)
+        [BindProperty]
+        public UserPageModel Input { get; set; } = new UserPageModel();
+
+        [TempData]
+        public string StatusMessage { get; set; }
+
+        public EditModel(IUserService userService)
         {
-            _dbWriteService = dbWriteService;
-            _dbReadService = dbReadService;
+            _userService = userService;
         }
 
-        public void OnGet(int id)
+        public void OnGet(string userId)
         {
-            ViewData["Modules"] = _dbReadService.GetSelectList<Module>("Id", "Title");
-            Input = _dbReadService.Get<Video>(id, true);
+            Input = _userService.GetUser(userId);
+            StatusMessage = string.Empty;
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                Input.CourseId = _dbReadService.Get<Module>(Input.ModuleId).CourseId;
-                Input.Course = null;
-                var success = await _dbWriteService.Update(Input);
+                var result = await _userService.UpdateUserAsync(Input);
 
-                if (success)
+                if (result)
                 {
-                    StatusMessage = $"Updated Video: {Input.Title}.";
+                    StatusMessage = $"User {Input.Email} was updated.";
                     return RedirectToPage("Index");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }
