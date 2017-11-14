@@ -1,0 +1,44 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
+
+@model EditModel
+@{
+    ViewData["Title"] = "Change course for user";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2>@ViewData["Title"]</h2>
+            <page-button path="UserCourses/Index" bootstrap-style="primary" glyph="info-sign" description="Back to List"></page-button>
+            <page-button path="Index" bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <p></p>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.UserCourse.UserId" />
+                <input type="hidden" asp-for="Input.UserCourse.CourseId" />
+                <input type="hidden" asp-for="Input.UpdatedUserCourse.UserId" />
+                <input type="hidden" asp-for="Input.CourseTitle" />
+
+                <div class="form-group">
+                    <label asp-for="Input.Email" class="control-label"></label>
+                    <input asp-for="Input.Email" readonly class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.UpdatedUserCourse.CourseId" class="control-label"></label>
+                    <select asp-for="Input.UpdatedUserCourse.CourseId" class="form-control" asp-items="ViewBag.Courses"></select>
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+        <div>
+        </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

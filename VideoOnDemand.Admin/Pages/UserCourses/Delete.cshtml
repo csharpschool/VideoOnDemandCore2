@@ -1,0 +1,36 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
+
+@model DeleteModel
+@{
+    ViewData["Title"] = "Remove user from course";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <h2>@ViewData["Title"]</h2>
+            <page-button path="UserCourses/Index" bootstrap-style="primary" glyph="info-sign" description="Back to List"></page-button>
+            <page-button path="UserCourses/Edit" bootstrap-style="success" glyph="pencil" description="Edit" id-userId="@Model.Input.UserCourse.UserId" id-courseId="@Model.Input.UserCourse.CourseId"></page-button>
+            <page-button path="Index" bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <p></p>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Input.CourseTitle)</dt>
+                <dd>@Html.DisplayFor(model => model.Input.CourseTitle)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Input.Email)</dt>
+                <dd>@Html.DisplayFor(model => model.Input.Email)</dd>
+            </dl>
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.UserCourse.CourseId" />
+                <input type="hidden" asp-for="Input.UserCourse.UserId" />
+                <input type="hidden" asp-for="Input.Email" />
+                <input type="hidden" asp-for="Input.CourseTitle" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+}
