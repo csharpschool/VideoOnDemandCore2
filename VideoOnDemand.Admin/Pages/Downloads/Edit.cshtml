@@ -1,0 +1,49 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
+
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Download";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2>@ViewData["Title"]</h2>
+            <page-button path="Downloads/Index" bootstrap-style="primary" glyph="info-sign" description="Back to List"></page-button>
+            <page-button path="Index" bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <p></p>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Id" />
+                <div class="form-group">
+                    <label asp-for="Input.Title" class="control-label"></label>
+                    <input asp-for="Input.Title" class="form-control" />
+                    <span asp-validation-for="Input.Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Url" class="control-label"></label>
+                    <input asp-for="Input.Url" class="form-control" />
+                    <span asp-validation-for="Input.Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Course</label>
+                    <input asp-for="Input.Course.Title" readonly class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ModuleId" class="control-label"></label>
+                    <select asp-for="Input.ModuleId" class="form-control" asp-items="ViewBag.Modules"></select>
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+        <div>
+        </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

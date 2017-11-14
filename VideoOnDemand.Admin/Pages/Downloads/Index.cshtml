@@ -1,0 +1,47 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
+@model IndexModel
+@{
+    ViewData["Title"] = "Downloads";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@ViewData["Title"]</h2>
+            <status-message message="@Model.StatusMessage" message-type="success"></status-message>
+            <page-button path="Downloads/Create" bootstrap-style="primary" description="Create New"></page-button>
+            <page-button path="Index" bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Course</th>
+                        <th>Module</th>
+                        <th>Url</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Course.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Module.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Url)</td>
+                            <td class="button-col-width">
+                                <page-button path="Downloads/Edit" bootstrap-style="success" glyph="pencil" id="@item.Id"></page-button>
+                                <page-button path="Downloads/Delete" bootstrap-style="danger" glyph="remove" id="@item.Id"></page-button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+}
