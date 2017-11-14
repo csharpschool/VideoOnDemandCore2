@@ -23,5 +23,18 @@ namespace VideoOnDemand.Admin.Services
                 return false;
             }
         }
+        public async Task<bool> Delete<TEntity>(TEntity item) where TEntity : class
+        {
+            try
+            {
+                _db.Set<TEntity>().Remove(item);
+                return await _db.SaveChangesAsync() >= 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
