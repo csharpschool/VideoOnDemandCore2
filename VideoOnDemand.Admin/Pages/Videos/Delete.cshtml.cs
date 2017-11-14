@@ -1,45 +1,47 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using VideoOnDemand.Admin.Services;
-using VideoOnDemand.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
+using VideoOnDemand.Data.Services;
+using VideoOnDemand.Data.Data.Entities;
 
-namespace VideoOnDemand.Admin.Pages.Users
+namespace VideoOnDemand.Admin.Pages.Videos
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
-        private IUserService _userService;
+        private IDbWriteService _dbWriteService;
+        private IDbReadService _dbReadService;
 
-        [BindProperty]
-        public UserPageModel Input { get; set; } = new UserPageModel();
+        [BindProperty] public Video Input { get; set; } = new Video();
+        [TempData] public string StatusMessage { get; set; }
 
-        [TempData]
-        public string StatusMessage { get; set; }
-
-        public DeleteModel(IUserService userService)
+        public DeleteModel(IDbReadService dbReadService,
+        IDbWriteService dbWriteService)
         {
-            _userService = userService;
+            _dbWriteService = dbWriteService;
+            _dbReadService = dbReadService;
         }
 
-        public void OnGet(string userId)
+        public void OnGet(int id)
         {
-            Input = _userService.GetUser(userId);
-            StatusMessage = string.Empty;
+            Input = _dbReadService.Get<Video>(id, true);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                var result = await _userService.DeleteUser(Input.Id);
+                var success = await _dbWriteService.Delete(Input);
 
-                if (result)
+                if (success)
                 {
-                    StatusMessage = $"User {Input.Email} was deleted.";
+                    StatusMessage = $"Deleted Video: {Input.Title}.";
                     return RedirectToPage("Index");
                 }
             }
 
+            // If we got this far, something failed, redisplay form
             return Page();
         }
     }
