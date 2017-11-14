@@ -35,7 +35,7 @@ namespace VideoOnDemand.Admin.Pages
                    Count = count.users,
                    Description = "Users",
                    Icon = "education",
-                   Url = "./UserPages/Index"
+                   Url = "./Users/Index"
                },
                courses: new CardViewModel
                {

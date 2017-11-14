@@ -1,4 +1,47 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
 @model IndexModel
 @{
+    ViewData["Title"] = "Users";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Users</h2>
+            <status-message message="@Model.StatusMessage"
+                            message-type="success"></status-message>
+            <page-button path="Users/Create" Bootstrap-style="primary" description="Create New"></page-button>
+            <page-button path="Index" Bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Id</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => user.IsAdmin)</td>
+                            <td>@Html.DisplayFor(modelItem => user.Id)</td>
+                            <td class="button-col-width">
+                                <page-button path="Users/Edit" Bootstrap-style="success" glyph="pencil" id-userId="@user.Id"></page-button>
+                                <page-button path="Users/Delete" Bootstrap-style="danger" glyph="remove" id-userId="@user.Id"></page-button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
 }
