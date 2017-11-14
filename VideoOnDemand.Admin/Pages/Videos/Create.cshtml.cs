@@ -1,58 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using VideoOnDemand.Admin.Services;
-using VideoOnDemand.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
+using VideoOnDemand.Data.Services;
+using VideoOnDemand.Data.Data.Entities;
 
-namespace VideoOnDemand.Admin.Pages.Users
+namespace VideoOnDemand.Admin.Pages.Videos
 {
     [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
-        private IUserService _userService;
+        private IDbReadService _dbReadService;
+        private IDbWriteService _dbWriteService;
 
-        [BindProperty]
-        public RegisterUserPageModel Input { get; set; } = new RegisterUserPageModel();
+        [BindProperty] public Video Input { get; set; } = new Video();
+        [TempData] public string StatusMessage { get; set; }
 
-        // Used to send a message back to the Index Razor Page.
-        [TempData]
-        public string StatusMessage { get; set; }
-
-        public CreateModel(IUserService userService)
+        public CreateModel(IDbReadService dbReadService,
+        IDbWriteService dbWriteService)
         {
-            _userService = userService;
+            _dbReadService = dbReadService;
+            _dbWriteService = dbWriteService;
         }
 
         public void OnGet()
         {
+            ViewData["Modules"] = _dbReadService.GetSelectList<Module>("Id", "Title");
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                var result = await _userService.AddUserAsync(Input);
+                Input.CourseId = _dbReadService.Get<Module>(Input.ModuleId).CourseId;
+                var success = await _dbWriteService.Add(Input);
 
-                if (result.Succeeded)
+                if (success)
                 {
-                    // Message sent back to the Index Razor Page.
-                    StatusMessage = $"Created a new account for { Input.Email}.";
-    
-                return RedirectToPage("Index");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty,
-                        error.Description);
+                    StatusMessage = $"Created a new Video: {Input.Title}.";
+                    return RedirectToPage("Index");
                 }
             }
 
-            // Something failed, redisplay the form.
+            // If we got this far, something failed, redisplay form
             return Page();
         }
     }
