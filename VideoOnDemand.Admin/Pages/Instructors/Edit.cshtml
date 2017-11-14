@@ -1,0 +1,46 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
+
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Instructor";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2>@ViewData["Title"]</h2>
+            <page-button path="Instructors/Index" bootstrap-style="primary" glyph="info-sign" description="Back to List"></page-button>
+            <page-button path="Index" bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+            <p></p>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Id" />
+                <div class="form-group">
+                    <label asp-for="Input.Name" class="control-label"></label>
+                    <input asp-for="Input.Name" class="form-control" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Description" class="control-label"></label>
+                    <input asp-for="Input.Description" class="form-control" />
+                    <span asp-validation-for="Input.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Thumbnail" class="control-label"></label>
+                    <input asp-for="Input.Thumbnail" class="form-control" />
+                    <span asp-validation-for="Input.Thumbnail" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+        <div>
+        </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
