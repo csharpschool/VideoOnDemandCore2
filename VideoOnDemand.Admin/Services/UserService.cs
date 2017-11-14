@@ -4,6 +4,7 @@ using System.Linq;
 using VideoOnDemand.Admin.Models;
 using VideoOnDemand.Data.Data;
 using VideoOnDemand.Data.Data.Entities;
+using System.Threading.Tasks;
 
 namespace VideoOnDemand.Admin.Services
 {
@@ -15,6 +16,18 @@ namespace VideoOnDemand.Admin.Services
         {
             _db = db;
             _userManager = userManager;
+        }
+
+        public async Task<IdentityResult> AddUserAsync(RegisterUserPageModel user)
+        {
+            var dbUser = new User
+            {
+                UserName = user.Email,
+                Email = user.Email,
+                EmailConfirmed = true
+            };
+            var result = await _userManager.CreateAsync(dbUser, user.Password);
+            return result;
         }
 
         public UserPageModel GetUser(string userId)
