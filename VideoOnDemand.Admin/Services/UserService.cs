@@ -31,6 +31,29 @@ namespace VideoOnDemand.Admin.Services
             return result;
         }
 
+        public async Task<bool> DeleteUser(string userId)
+        {
+            try
+            {
+                var dbUser = await _db.Users.FirstOrDefaultAsync(d => d.Id.Equals(userId));
+                if (dbUser == null) return false;
+
+                var userRoles = _db.UserRoles.Where(ur => ur.UserId.Equals(dbUser.Id));
+
+                _db.UserRoles.RemoveRange(userRoles);
+                _db.Users.Remove(dbUser);
+
+                var result = await _db.SaveChangesAsync();
+                if (result < 0) return false;
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public UserPageModel GetUser(string userId)
         {
             return (from user in _db.Users

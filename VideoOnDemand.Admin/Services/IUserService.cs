@@ -11,5 +11,6 @@ namespace VideoOnDemand.Admin.Services
         UserPageModel GetUser(string userId);
         Task<IdentityResult> AddUserAsync(RegisterUserPageModel user);
         Task<bool> UpdateUserAsync(UserPageModel user);
+        Task<bool> DeleteUser(string userId);
     }
 }
