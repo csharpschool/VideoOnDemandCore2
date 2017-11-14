@@ -1,0 +1,9 @@
+﻿a.btn-sm {
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+.button-col-width {
+    min-width: 85px;
+}
+
