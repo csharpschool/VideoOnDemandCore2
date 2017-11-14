@@ -35,6 +35,18 @@ namespace VideoOnDemand.Admin.Services
                 return false;
             }
         }
+        public async Task<bool> Update<TEntity>(TEntity item) where TEntity : class
+        {
+            try
+            {
+                _db.Set<TEntity>().Update(item);
+                return await _db.SaveChangesAsync() >= 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }
