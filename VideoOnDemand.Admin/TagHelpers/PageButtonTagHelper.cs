@@ -54,7 +54,20 @@ namespace VideoOnDemand.Admin.TagHelpers
                 if (param.Length > 0)
                     href = href.Insert(href.Length - 1, $"?{param}");
 
-                output.Content.AppendHtml($@"<a {href}>{Description}</a>");
+
+                // Display Glyph icons
+                var glyphClasses = string.Empty;
+                Glyph = Glyph.Trim();
+                if (Glyph.StartsWith("glyphicon-"))
+                    Glyph = Glyph.Substring(Glyph.IndexOf('-') + 1);
+                if (Glyph.Length > 0)
+                {
+                    glyphClasses = $"class='glyphicon glyphicon-{Glyph}'";
+                    if (Description.Length > 0)
+                        Description = $" {Description}";
+                }
+
+                output.Content.AppendHtml($@"<a {href}><span {glyphClasses}></span>{Description}</a>");
             }
         }
     }
