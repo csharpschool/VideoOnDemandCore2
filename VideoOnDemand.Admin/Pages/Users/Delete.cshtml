@@ -1,4 +1,39 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using VideoOnDemand.Data.Data.Entities
+@inject SignInManager<User> SignInManager
 @model DeleteModel
 @{
+    ViewData["Title"] = "Delete User";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>@ViewData["Title"]</h2>
+
+            <page-button path="Users/Index" Bootstrap-style="primary" glyph="info-sign" description="Back to List"></page-button>
+            <page-button path="Index" Bootstrap-style="warning" glyph="list-alt" description="Dashboard"></page-button>
+
+            <hr />
+
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Input.Id)</dt>
+                <dd>@Html.DisplayFor(model => model.Input.Id)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Input.Email)</dt>
+                <dd>@Html.DisplayFor(model => model.Input.Email)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Input.IsAdmin)</dt>
+                <dd>@Html.DisplayFor(model => model.Input.IsAdmin)</dd>
+            </dl>
+
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Id" />
+                <input type="hidden" asp-for="Input.Email" />
+                <input type="hidden" asp-for="Input.IsAdmin" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
 }
