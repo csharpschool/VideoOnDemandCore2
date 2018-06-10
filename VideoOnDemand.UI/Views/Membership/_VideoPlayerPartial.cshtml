@@ -3,7 +3,8 @@
 <div class="panel">
     @if (Model.Video.Url != null)
     {
-        <div id="video" class="video-margin">&nbsp;</div>
+        @*<div id="video" class="video-margin">&nbsp;</div>*@
+        <video id="video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto"> </video>
         <div id="hiddenUrl" hidden="hidden">@Model.Video.Url</div>
         <div id="hiddenImageUrl" hidden="hidden">@Model.Video.Thumbnail</div>
     }

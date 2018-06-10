@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VideoOnDemand.UI</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i" rel="stylesheet">
+    <link href="//vjs.zencdn.net/7.0/video-js.min.css" rel="stylesheet">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -65,7 +66,9 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="https://content.jwplatform.com/libraries/7mEts3ci.js"></script>
+        <script src="//vjs.zencdn.net/7.0/video.min.js"></script>
+        <script src="~/js/Youtube.min.js"></script>
+        <script src="~/js/videoJS.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -81,7 +84,9 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
-        <script src="https://content.jwplatform.com/libraries/7mEts3ci.js"></script>
+        <script src="//vjs.zencdn.net/7.0/video.min.js"></script>
+        <script src="~/js/Youtube.min.js"></script>
+        <script src="~/js/videoJS.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
