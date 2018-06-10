@@ -14,6 +14,7 @@ namespace VideoOnDemand.UI.Controllers
         public HomeController(SignInManager<User> signInMgr)
         {
             _signInManager = signInMgr;
+            //var test = signInMgr.Context.User;
         }
 
         public IActionResult Index()

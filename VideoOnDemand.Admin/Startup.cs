@@ -39,7 +39,11 @@ namespace VideoOnDemand.Admin
             services.AddTransient<IDbWriteService, DbWriteService>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddMvc();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Account/Manage");
+                options.Conventions.AuthorizePage("/Account/Logout");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using VideoOnDemand.Admin.Models;
 using VideoOnDemand.Data.Services;
 
 namespace VideoOnDemand.Admin.Pages
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private IDbReadService _db;
